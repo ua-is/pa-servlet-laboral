@@ -10,12 +10,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
 
-@WebServlet(name = "SaveTrabajadorServlet", urlPatterns = "/savetrabajador")
-public class SaveTrabajadorServlet extends HttpServlet {
+@WebServlet(name = "SaveEditTrabajadorServlet", urlPatterns = "/saveedittrabajador")
+public class SaveEditTrabajadorServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+        Integer id = Integer.parseInt( request.getParameter("id") );
         String apellidoNombre = request.getParameter("apellido-nombre");
         String dni = request.getParameter("dni");
         String fechaNacimiento = request.getParameter("fecha-nacimiento");
@@ -24,17 +24,15 @@ public class SaveTrabajadorServlet extends HttpServlet {
         String actividad = request.getParameter("actividad");
         String direccionLaboral = request.getParameter("direccion-laboral");
 
-        Trabajador trabajador = new Trabajador(apellidoNombre, dni, fechaNacimiento, direccionPersonal,
+        Trabajador trabajador = new Trabajador(id, apellidoNombre, dni, fechaNacimiento, direccionPersonal,
                 nombreEmpresa, actividad, direccionLaboral);
 
         try {
             TrabajadorDao dao = new TrabajadorDao();
-            dao.insert(trabajador);
+            dao.update(trabajador);
         } catch (Exception e) {
             System.err.println(e.getMessage());
         }
-
-        //request.setAttribute("trabajador", trabajador);
 
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("/showtrabajadores");
         requestDispatcher.forward(request, response);
@@ -42,8 +40,6 @@ public class SaveTrabajadorServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.setContentType("text/html");
-        PrintWriter out = response.getWriter();
-        out.println("<p>TODO OK</p>");
+
     }
 }
