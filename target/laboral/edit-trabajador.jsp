@@ -1,4 +1,7 @@
-<%@ page import="pe.edu.autonoma.laboral.entity.Trabajador" %><%--
+<%@ page import="pe.edu.autonoma.laboral.entity.Trabajador" %>
+<%@ page import="pe.edu.autonoma.laboral.entity.Actividad" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="java.util.List" %><%--
   Created by IntelliJ IDEA.
   User: USUARIO
   Date: 13/06/2020
@@ -8,9 +11,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%!
     Trabajador trabajador;
+    List<Actividad> actividades = new ArrayList<>();
 %>
 <%
     trabajador = (Trabajador) request.getAttribute("trabajador");
+    actividades = (List<Actividad>) request.getAttribute("actividades");
 %>
 <!DOCTYPE html>
 <html lang="es">
@@ -67,8 +72,25 @@
                     <input type="text" name="nombre-empresa" id="nombre-empresa"
                            value="<%=trabajador.getNombreEmpresa()%>"><br>
                     <label for="actividad">Actividad: </label>
-                    <input type="text" name="actividad" id="actividad"
-                           value="<%=trabajador.getActividad()%>"><br>
+                    <select name="actividad" id="actividad">
+                        <%
+                            for (Actividad actividad : actividades) {
+                        %>
+                        <option value="<%=actividad.getId()%>"
+                                <%
+                                    if (actividad.getId().equals(trabajador.getActividad().getId())) {
+                                %>
+                                selected
+                                <%
+                                  }
+                                %>
+                        >
+                            <%=actividad.getDescripcion()%> </option>
+                        <%
+                            }
+                        %>
+                    </select><br>
+
                     <label for="direccion-laboral">Direción: </label>
                     <input type="text" name="direccion-laboral" id="direccion-laboral"
                            value="<%=trabajador.getDireccionLaboral()%>">

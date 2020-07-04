@@ -62,7 +62,7 @@
                         <td><%=trabajador.getFechaNacimiento()%></td>
                         <td><%=trabajador.getDireccionPersonal()%></td>
                         <td><%=trabajador.getNombreEmpresa()%></td>
-                        <td><%=trabajador.getActividad()%></td>
+                        <td><%=trabajador.getActividad().getDescripcion()%></td>
                         <td><%=trabajador.getDireccionLaboral()%></td>
                         <td>
                             <a href="edittrabajador?id=<%=trabajador.getId()%>" class="a-button a-button-edit">Editar</a>
@@ -78,7 +78,7 @@
                 <tfoot></tfoot>
             </table>
 
-            <a href="new-trabajador.jsp" class="a-button a-button-new">Nuevo Trabajador</a>
+            <a href="newtrabajador" class="a-button a-button-new">Nuevo Trabajador</a>
         </div>
         <div>
             .

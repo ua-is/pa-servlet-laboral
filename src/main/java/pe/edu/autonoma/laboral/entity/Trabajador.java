@@ -9,10 +9,11 @@ public class Trabajador {
     private String fechaNacimiento;
     private String direccionPersonal;
     private String nombreEmpresa;
-    private String actividad;
+    private Actividad actividad;
     private String direccionLaboral;
 
-    public Trabajador(Integer id, String apellidoNombre, String dni, String fechaNacimiento, String direccionPersonal, String nombreEmpresa, String actividad, String direccionLaboral) {
+    public Trabajador(Integer id, String apellidoNombre, String dni, String fechaNacimiento, String direccionPersonal,
+                      String nombreEmpresa, Actividad actividad, String direccionLaboral) {
         this.id = id;
         this.apellidoNombre = apellidoNombre;
         this.dni = dni;
@@ -23,7 +24,8 @@ public class Trabajador {
         this.direccionLaboral = direccionLaboral;
     }
 
-    public Trabajador(String apellidoNombre, String dni, String fechaNacimiento, String direccionPersonal, String nombreEmpresa, String actividad, String direccionLaboral) {
+    public Trabajador(String apellidoNombre, String dni, String fechaNacimiento, String direccionPersonal,
+                      String nombreEmpresa, Actividad actividad, String direccionLaboral) {
         this.apellidoNombre = apellidoNombre;
         this.dni = dni;
         this.fechaNacimiento = fechaNacimiento;
@@ -81,11 +83,11 @@ public class Trabajador {
         this.nombreEmpresa = nombreEmpresa;
     }
 
-    public String getActividad() {
+    public Actividad getActividad() {
         return actividad;
     }
 
-    public void setActividad(String actividad) {
+    public void setActividad(Actividad actividad) {
         this.actividad = actividad;
     }
 
@@ -96,4 +98,5 @@ public class Trabajador {
     public void setDireccionLaboral(String direccionLaboral) {
         this.direccionLaboral = direccionLaboral;
     }
+
 }

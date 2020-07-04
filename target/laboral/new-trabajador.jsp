@@ -1,4 +1,6 @@
-<%--
+<%@ page import="pe.edu.autonoma.laboral.entity.Actividad" %>
+<%@ page import="java.util.List" %>
+<%@ page import="java.util.ArrayList" %><%--
   Created by IntelliJ IDEA.
   User: USUARIO
   Date: 13/06/2020
@@ -6,6 +8,12 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%!
+    List<Actividad> actividades = new ArrayList<>();
+%>
+<%
+    actividades = (List<Actividad>) request.getAttribute("actividades");
+%>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -51,7 +59,15 @@
                     <label for="nombre-empresa">Nombre de la empresa: </label>
                     <input type="text" name="nombre-empresa" id="nombre-empresa"><br>
                     <label for="actividad">Actividad: </label>
-                    <input type="text" name="actividad" id="actividad"><br>
+                    <select name="actividad" id="actividad">
+                        <%
+                            for (Actividad actividad : actividades) {
+                        %>
+                        <option value="<%=actividad.getId()%>"> <%=actividad.getDescripcion()%> </option>
+                       <%
+                            }
+                        %>
+                    </select><br>
                     <label for="direccion-laboral">Direción: </label>
                     <input type="text" name="direccion-laboral" id="direccion-laboral">
                 </fieldset>

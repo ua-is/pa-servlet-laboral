@@ -23,8 +23,8 @@ public class Conexion {
             System.out.println("Conexion establecida");
 
         } catch (Exception e) {
-            System.out.println( e.getMessage() );
-            System.out.println("Conexion Fallida");
+            System.err.println( e.getMessage() );
+            System.err.println("Conexion Fallida");
         }
         return conn;
     }
@@ -35,7 +35,7 @@ public class Conexion {
                 conn.close();
             }
         } catch(Exception e) {
-            System.out.println(e.getMessage());
+            System.err.println(e.getMessage());
         }
 
     }

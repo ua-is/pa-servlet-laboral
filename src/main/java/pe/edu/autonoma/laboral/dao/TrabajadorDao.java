@@ -2,6 +2,7 @@ package pe.edu.autonoma.laboral.dao;
 
 import com.mysql.cj.protocol.Resultset;
 import pe.edu.autonoma.laboral.conexion.Conexion;
+import pe.edu.autonoma.laboral.entity.Actividad;
 import pe.edu.autonoma.laboral.entity.Trabajador;
 
 import java.sql.Connection;
@@ -15,9 +16,12 @@ import java.util.Optional;
 public class TrabajadorDao {
     private Connection conn;
     private PreparedStatement ps;
+    private ActividadDao actividadDao;
 
     public TrabajadorDao() {
         conn = Conexion.openConnection();
+        actividadDao = new ActividadDao();
+
     }
     // Métodos CRUD
     // Create
@@ -25,7 +29,7 @@ public class TrabajadorDao {
         // Base de datos se utiliza la nomenclatura Snake Case
         try {
             String sql = "INSERT INTO trabajador (apellido_nombre, dni, fecha_nacimiento, direccion_personal, " +
-                    "nombre_empresa, actividad, direccion_laboral ) " +
+                    "nombre_empresa, actividad_id, direccion_laboral ) " +
                     "VALUES (?, ?, ?, ?, ?, ?, ?)";
 
             ps = conn.prepareStatement(sql);
@@ -34,7 +38,7 @@ public class TrabajadorDao {
             ps.setString(3, trabajador.getFechaNacimiento());
             ps.setString(4, trabajador.getDireccionPersonal());
             ps.setString(5, trabajador.getNombreEmpresa());
-            ps.setString(6, trabajador.getActividad());
+            ps.setInt(6, trabajador.getActividad().getId());
             ps.setString(7, trabajador.getDireccionLaboral());
 
             ps.executeUpdate();
@@ -52,11 +56,17 @@ public class TrabajadorDao {
             ps = conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             while( rs.next() ) {
+                // Creación del objeto actividad
+                // Creación del objeto actividad
+                int idActividad = rs.getInt("actividad_id");
+                Optional<Actividad> optionalActividad = actividadDao.findId( idActividad );
+
                 // id, apellido_nombre, dni, fecha_nacimiento, direccion_personal, nombre_empresa, actividad, direccion_laboral
                 Trabajador trabajador = new Trabajador( rs.getInt("id"), rs.getString("apellido_nombre"),
                         rs.getString("dni"), rs.getString("fecha_nacimiento"),
                         rs.getString("direccion_personal"), rs.getString("nombre_empresa"),
-                        rs.getString("actividad"), rs.getString("direccion_laboral"));
+                        optionalActividad.get(), rs.getString("direccion_laboral"));
+
                 trabajadores.add(trabajador);
             }
             ps.close();
@@ -77,11 +87,14 @@ public class TrabajadorDao {
             ResultSet rs = ps.executeQuery();
 
             if( rs.next() ) {
+                // Creación del objeto actividad
+                int idActividad = rs.getInt("actividad_id");
+                Optional<Actividad> optionalActividad = actividadDao.findId( idActividad );
                 // id, apellido_nombre, dni, fecha_nacimiento, direccion_personal, nombre_empresa, actividad, direccion_laboral
                 Trabajador trabajador = new Trabajador( rs.getInt("id"), rs.getString("apellido_nombre"),
                         rs.getString("dni"), rs.getString("fecha_nacimiento"),
                         rs.getString("direccion_personal"), rs.getString("nombre_empresa"),
-                        rs.getString("actividad"), rs.getString("direccion_laboral"));
+                        optionalActividad.get(), rs.getString("direccion_laboral"));
 
                 optional = Optional.of(trabajador);
             }
@@ -102,7 +115,7 @@ public class TrabajadorDao {
         // Base de datos se utiliza la nomenclatura Snake Case
         try {
             String sql = "UPDATE trabajador SET apellido_nombre = ?, dni = ?, fecha_nacimiento = ?, direccion_personal = ?, " +
-                    "nombre_empresa = ?, actividad = ?, direccion_laboral = ?  " +
+                    "nombre_empresa = ?, actividad_id = ?, direccion_laboral = ?  " +
                     "WHERE id = ?";
 
             ps = conn.prepareStatement(sql);
@@ -111,7 +124,7 @@ public class TrabajadorDao {
             ps.setString(3, trabajador.getFechaNacimiento());
             ps.setString(4, trabajador.getDireccionPersonal());
             ps.setString(5, trabajador.getNombreEmpresa());
-            ps.setString(6, trabajador.getActividad());
+            ps.setInt(6, trabajador.getActividad().getId());
             ps.setString(7, trabajador.getDireccionLaboral());
             ps.setInt(8, trabajador.getId());
 

@@ -12,42 +12,28 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
-@WebServlet(name = "EditTrabajadorServlet", urlPatterns = "/edittrabajador")
-public class EditTrabajadorServlet extends HttpServlet {
+@WebServlet(name = "NewTrabajadorServlet", urlPatterns = "/newtrabajador")
+public class NewTrabajadorServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Integer id = Integer.parseInt( request.getParameter("id") );
-
-        //Trabajador trabajador = null;
-        RequestDispatcher requestDispatcher = null;
         List<Actividad> actividades = new ArrayList<>();
 
         try {
-            TrabajadorDao dao = new TrabajadorDao();
-            Optional<Trabajador> optional = dao.findId(id);
-
-            if( optional.isPresent() ) {
-                // Obtener la lista de actividades
-                ActividadDao actividadDao = new ActividadDao();
-                actividades = actividadDao.list();
-                request.setAttribute("actividades", actividades);
-
-                request.setAttribute("trabajador", optional.get());
-                requestDispatcher = request.getRequestDispatcher("edit-trabajador.jsp");
-            } else {
-                requestDispatcher = request.getRequestDispatcher("/showtrabajadores");
-            }
+            ActividadDao dao = new ActividadDao();
+            actividades = dao.list();
         } catch (Exception e) {
             System.err.println(e.getMessage());
         }
+
+        request.setAttribute("actividades", actividades);
+
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("new-trabajador.jsp");
         requestDispatcher.forward(request, response);
     }
 }

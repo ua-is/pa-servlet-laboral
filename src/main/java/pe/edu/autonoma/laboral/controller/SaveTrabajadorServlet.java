@@ -1,6 +1,8 @@
 package pe.edu.autonoma.laboral.controller;
 
+import pe.edu.autonoma.laboral.dao.ActividadDao;
 import pe.edu.autonoma.laboral.dao.TrabajadorDao;
+import pe.edu.autonoma.laboral.entity.Actividad;
 import pe.edu.autonoma.laboral.entity.Trabajador;
 
 import javax.servlet.RequestDispatcher;
@@ -11,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Optional;
 
 @WebServlet(name = "SaveTrabajadorServlet", urlPatterns = "/savetrabajador")
 public class SaveTrabajadorServlet extends HttpServlet {
@@ -21,11 +24,16 @@ public class SaveTrabajadorServlet extends HttpServlet {
         String fechaNacimiento = request.getParameter("fecha-nacimiento");
         String direccionPersonal = request.getParameter("direccion-personal");
         String nombreEmpresa = request.getParameter("nombre-empresa");
-        String actividad = request.getParameter("actividad");
+        String actividadId = request.getParameter("actividad");
         String direccionLaboral = request.getParameter("direccion-laboral");
 
+        // Creación del objeto actividad
+        ActividadDao actividadDao = new ActividadDao();
+        int idActividad = Integer.parseInt(actividadId);
+        Optional<Actividad> optionalActividad = actividadDao.findId( idActividad );
+
         Trabajador trabajador = new Trabajador(apellidoNombre, dni, fechaNacimiento, direccionPersonal,
-                nombreEmpresa, actividad, direccionLaboral);
+                nombreEmpresa, optionalActividad.get(), direccionLaboral);
 
         try {
             TrabajadorDao dao = new TrabajadorDao();
