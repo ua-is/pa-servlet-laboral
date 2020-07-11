@@ -21,7 +21,6 @@ public class TrabajadorDao {
     public TrabajadorDao() {
         conn = Conexion.openConnection();
         actividadDao = new ActividadDao();
-
     }
     // Métodos CRUD
     // Create

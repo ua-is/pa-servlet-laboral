@@ -1,4 +1,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%!
+    String username, message;
+
+%>
+<%
+    username = (String) request.getAttribute("username");
+    message = (String) request.getAttribute("message");
+%>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -10,23 +18,30 @@
 <body>
 
 <header>
-    <nav id="header-nav">
-        <div id="header-logo">
-            Logo
-        </div>
-        <ul id="nav-menu">
-            <li><a href="showtrabajadores">Listar Trabajadores</a></li>
-            <li><a href="#">Trabajador</a></li>
-            <li><a href="#">Empresa</a></li>
-            <li><a href="#">Preguntas</a></li>
-        </ul>
-    </nav>
+
 </header>
 <main>
-    <section id="secction-main">
+    <section id="secction-main-login">
         <div>.</div>
-        <div>
+        <div id="login">
+            <h3>Sign in</h3> <br>
+            <%
+                if( message != null ) {
+            %>
+            <p class="text-error"><%=message%></p>
+            <%
+                }
+            %>
+            <form id="form-login" action="signin" method="post">
 
+                <label for="username">Usuario: </label>
+                <input type="text" name="username" id="username" placeholder="Ingrese el username"
+                       value="<%=(username!=null ? username : "")%>"><br>
+                <label for="password">Contraseña: </label>
+                <input type="password" name="password" id="password">
+
+                <button type="submit">Ingresar</button>
+            </form>
         </div>
         <div>
             .
