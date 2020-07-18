@@ -1,9 +1,7 @@
 package pe.edu.autonoma.laboral.controller;
 
 import pe.edu.autonoma.laboral.dao.ActividadDao;
-import pe.edu.autonoma.laboral.dao.TrabajadorDao;
 import pe.edu.autonoma.laboral.entity.Actividad;
-import pe.edu.autonoma.laboral.entity.Trabajador;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;

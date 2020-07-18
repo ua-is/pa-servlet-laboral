@@ -24,8 +24,8 @@
             Logo
         </div>
         <ul id="nav-menu">
-            <li><a href="showtrabajadores">Listar Trabajadores</a></li>
-            <li><a href="#">Trabajador</a></li>
+            <li><a href="showtrabajadores">Trabajadores</a></li>
+            <li><a href="showremuneraciones">Remuneraciones</a></li>
             <li><a href="#">Empresa</a></li>
             <li><a href="signout">Cerrar Sesión</a></li>
         </ul>

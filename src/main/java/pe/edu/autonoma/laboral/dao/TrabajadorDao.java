@@ -1,6 +1,5 @@
 package pe.edu.autonoma.laboral.dao;
 
-import com.mysql.cj.protocol.Resultset;
 import pe.edu.autonoma.laboral.conexion.Conexion;
 import pe.edu.autonoma.laboral.entity.Actividad;
 import pe.edu.autonoma.laboral.entity.Trabajador;

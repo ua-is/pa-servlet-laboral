@@ -1,12 +1,13 @@
 <%@ page import="pe.edu.autonoma.laboral.entity.Trabajador" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="pe.edu.autonoma.laboral.entity.Remuneracion" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%!
-    List<Trabajador> trabajadores = new ArrayList<>();
+    List<Remuneracion> remuneraciones = new ArrayList<>();
 %>
 <%
-    trabajadores = (List<Trabajador>) request.getAttribute("trabajadores");
+    remuneraciones = (List<Remuneracion>) request.getAttribute("remuneraciones");
 %>
 <!DOCTYPE html>
 <html lang="es">
@@ -35,40 +36,38 @@
     <section id="secction-main">
         <div>.</div>
         <div>
-            <h2>Lista de Trabajadores</h2>
+            <h2>Lista de Remuneraciones</h2>
             <table id="table-trabajadores" class="table-collapse">
                 <thead>
                 <tr>
                     <th>#</th>
-                    <th>Apellidos y NOmbres</th>
-                    <th>Dni</th>
-                    <th>Fecha Nac.</th>
-                    <th>Dir. Personal</th>
-                    <th>Empresa</th>
-                    <th>Actividad</th>
-                    <th>Dir. Laboral</th>
+                    <th>Apellidos y Nombres</th>
+                    <th>Año</th>
+                    <th>Mes</th>
+                    <th>Monto Bruta</th>
+                    <th>Descuentos</th>
+                    <th>Monto Líquido</th>
                     <th></th>
                     <th></th>
                 </tr>
                 </thead>
                 <tbody>
                 <%
-                    for (Trabajador trabajador: trabajadores) {
+                    for (Remuneracion remuneracion: remuneraciones) {
                 %>
                     <tr>
-                        <td><%=trabajador.getId()%></td>
-                        <td><%=trabajador.getApellidoNombre()%></td>
-                        <td><%=trabajador.getDni()%></td>
-                        <td><%=trabajador.getFechaNacimiento()%></td>
-                        <td><%=trabajador.getDireccionPersonal()%></td>
-                        <td><%=trabajador.getNombreEmpresa()%></td>
-                        <td><%=trabajador.getActividad().getDescripcion()%></td>
-                        <td><%=trabajador.getDireccionLaboral()%></td>
+                        <td><%=remuneracion.getId()%></td>
+                        <td><%=remuneracion.getTrabajador().getApellidoNombre()%></td>
+                        <td><%=remuneracion.getAno()%></td>
+                        <td><%=remuneracion.getMes()%></td>
+                        <td><%=remuneracion.getMontoBruta()%></td>
+                        <td><%=remuneracion.getDescuento()%></td>
+                        <td><%=remuneracion.getMontoLiquido()%></td>
                         <td>
-                            <a href="edittrabajador?id=<%=trabajador.getId()%>" class="a-button a-button-edit">Editar</a>
+                            <a href="editremuneracion?id=<%=remuneracion.getId()%>" class="a-button a-button-edit">Editar</a>
                         </td>
                         <td>
-                            <a href="deltrabajador?id=<%=trabajador.getId()%>" class="a-button a-button-del">Borrar</a>
+                            <a href="delremuneracion?id=<%=remuneracion.getId()%>" class="a-button a-button-del">Borrar</a>
                         </td>
                     </tr>
                 <%
@@ -78,7 +77,7 @@
                 <tfoot></tfoot>
             </table>
 
-            <a href="newtrabajador" class="a-button a-button-new">Nuevo Trabajador</a>
+            <a href="newremuneracion" class="a-button a-button-new">Nueva Remuneración</a>
         </div>
         <div>
             .

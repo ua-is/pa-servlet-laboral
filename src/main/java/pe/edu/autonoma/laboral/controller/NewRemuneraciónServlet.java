@@ -14,39 +14,26 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
-@WebServlet(name = "EditTrabajadorServlet", urlPatterns = "/edittrabajador")
-public class EditTrabajadorServlet extends HttpServlet {
+@WebServlet(name = "NewRemuneracionServlet", urlPatterns = "/newremuneracion")
+public class NewRemuneraciónServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Integer id = Integer.parseInt( request.getParameter("id") );
-
-        //Trabajador trabajador = null;
-        RequestDispatcher requestDispatcher = null;
-        List<Actividad> actividades = new ArrayList<>();
+        List<Trabajador> trabajadores = new ArrayList<>();
 
         try {
             TrabajadorDao dao = new TrabajadorDao();
-            Optional<Trabajador> optional = dao.findId(id);
-
-            if( optional.isPresent() ) {
-                // Obtener la lista de actividades
-                ActividadDao actividadDao = new ActividadDao();
-                actividades = actividadDao.list();
-                request.setAttribute("actividades", actividades);
-
-                request.setAttribute("trabajador", optional.get());
-                requestDispatcher = request.getRequestDispatcher("edit-trabajador.jsp");
-            } else {
-                requestDispatcher = request.getRequestDispatcher("/showtrabajadores");
-            }
+            trabajadores = dao.list();
         } catch (Exception e) {
             System.err.println(e.getMessage());
         }
+
+        request.setAttribute("trabajadores", trabajadores);
+
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("new-remuneracion.jsp");
         requestDispatcher.forward(request, response);
     }
 }
