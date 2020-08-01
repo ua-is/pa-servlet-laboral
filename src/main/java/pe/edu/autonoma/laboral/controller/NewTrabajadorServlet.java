@@ -20,6 +20,7 @@ public class NewTrabajadorServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        ValidSession.valid(request, response);
         List<Actividad> actividades = new ArrayList<>();
 
         try {

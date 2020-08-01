@@ -20,7 +20,7 @@ import java.util.Optional;
 @WebServlet(name = "SaveRemuneracionServlet", urlPatterns = "/saveremuneracion")
 public class SaveRemuneracionServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        ValidSession.valid(request, response);
         Integer trabajadorId = Integer.parseInt(request.getParameter("trabajador"));
         Integer ano = Integer.parseInt(request.getParameter("ano"));
         Integer mes = Integer.parseInt(request.getParameter("mes"));

@@ -22,6 +22,7 @@ public class NewRemuneraciónServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        ValidSession.valid(request, response);
         List<Trabajador> trabajadores = new ArrayList<>();
 
         try {

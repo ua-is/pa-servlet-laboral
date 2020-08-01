@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -17,6 +18,8 @@ import java.util.List;
 @WebServlet(name = "ShowTrabajadoresServlet", urlPatterns = "/showtrabajadores")
 public class ShowTrabajadoresServlet extends HttpServlet {
     protected void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        ValidSession.valid(request, response);
+
         List<Trabajador> trabajadores = new ArrayList<>();
 
         try {
@@ -30,7 +33,6 @@ public class ShowTrabajadoresServlet extends HttpServlet {
 
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("show-trabajadores.jsp");
         requestDispatcher.forward(request, response);
-
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

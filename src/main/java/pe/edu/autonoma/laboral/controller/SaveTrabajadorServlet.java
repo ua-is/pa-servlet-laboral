@@ -18,7 +18,7 @@ import java.util.Optional;
 @WebServlet(name = "SaveTrabajadorServlet", urlPatterns = "/savetrabajador")
 public class SaveTrabajadorServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        ValidSession.valid(request, response);
         String apellidoNombre = request.getParameter("apellido-nombre");
         String dni = request.getParameter("dni");
         String fechaNacimiento = request.getParameter("fecha-nacimiento");

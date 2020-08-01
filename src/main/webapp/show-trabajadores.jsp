@@ -27,7 +27,7 @@
             <li><a href="showtrabajadores">Trabajadores</a></li>
             <li><a href="showremuneraciones">Remuneraciones</a></li>
             <li><a href="#">Empresa</a></li>
-            <li><a href="signout">Cerrar Sesión</a></li>
+            <li><a href="signout">Cerrar Sesión <%=(String)request.getSession().getAttribute("username")%> </a></li>
         </ul>
     </nav>
 </header>

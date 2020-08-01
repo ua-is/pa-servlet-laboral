@@ -17,7 +17,7 @@ import java.util.Optional;
 @WebServlet(name = "SaveEditTrabajadorServlet", urlPatterns = "/saveedittrabajador")
 public class SaveEditTrabajadorServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        ValidSession.valid(request, response);
         Integer id = Integer.parseInt( request.getParameter("id") );
         String apellidoNombre = request.getParameter("apellido-nombre");
         String dni = request.getParameter("dni");

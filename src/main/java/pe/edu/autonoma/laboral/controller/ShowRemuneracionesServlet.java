@@ -18,6 +18,7 @@ import java.util.List;
 @WebServlet(name = "ShowRemuneracionesServlet", urlPatterns = "/showremuneraciones")
 public class ShowRemuneracionesServlet extends HttpServlet {
     protected void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        ValidSession.valid(request, response);
         // Crear la lista de remuneraciones
         List<Remuneracion> remuneraciones = new ArrayList<>();
 

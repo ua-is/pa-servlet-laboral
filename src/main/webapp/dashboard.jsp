@@ -1,3 +1,13 @@
+<%!
+    String username;
+    HttpSession session;
+%>
+<%
+    // Obtener la sesión creada
+    session = request.getSession();
+    // obtener el valor de la variable guardada en la sesión, previo cast
+    username = (String) session.getAttribute("username");
+%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="es">
@@ -18,7 +28,7 @@
             <li><a href="showtrabajadores">Listar Trabajadores</a></li>
             <li><a href="#">Trabajador</a></li>
             <li><a href="#">Empresa</a></li>
-            <li><a href="signout">Cerrar Sesión</a></li>
+            <li><a href="signout">Cerrar Sesión <%=username%></a></li>
         </ul>
     </nav>
 </header>
